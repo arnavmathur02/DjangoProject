@@ -1,25 +1,84 @@
+{% extends 'shop/base.html' %}
+
 {% load static  %}
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   {% block css %}
+      .col-md-3 {
+        display: inline-block;
+        margin-left: -4px;
+      }
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+      .col-md-3 img {
+        width: 100%;
+        height: auto;
+      }
 
-    <title>Hello, world!</title>
-  </head>
-  <body>
-    <h1>Hello, world from SHOP APP!</h1>
-    <a href="{% static 'shop/mystatic.txt' %}">Click ME!!</a>
+      body .carousel-indicators li {
+        background-color: blue;
+      }
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  </body>
-</html>
+      body .carousel-control-prev-icon,
+      body .carousel-control-next-icon {
+        background-color: blue;
+      }
+
+      body .no-padding {
+        padding-left: 0;
+        padding-right: 0;
+      }
+
+      body .carousel-indicators {
+        bottom: 0;
+      }
+
+      .carousel-indicators .active  {
+        background-color: blue;
+      }
+
+    {% endblock %}
+
+
+  {%  block body %}
+  <div class="container">
+
+    <div id="demo" class="carousel slide my-3" data-ride="carousel">
+      
+      <ul class="carousel-indicators">
+
+        {% for i in range %}
+        <li data-target="#demo" data-slide-to="{{i}}" class="active"></li>
+        {% endfor %}
+      </ul>
+    
+    <!-- Slideshow starts here -->
+
+      <div class="container  carousel-inner no-padding">
+        {% for i in range %}
+        <div class="carousel-item active">
+          <div class="col-xs-3 col-sm-3 col-md-3">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src='/media/{{i.image}}' alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{i.product_name}}</h5>
+                <p class="card-text">{{i.desc}}</p>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+
+    <!-- Left and right Controls for the slide -->
+    <a class="carousel-control-prev" href="#demo" data-slide="prev">
+      <span class="carousel-control-prev-icon"></span>
+    </a>
+    <a class="carousel-control-next" href="#demo" data-slide="next">
+      <span class="carousel-control-next-icon"></span>
+    </a>
+
+  </div>
+
+  {%  endblock %}
