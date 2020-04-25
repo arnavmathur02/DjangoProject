@@ -1,5 +1,4 @@
 {% extends 'shop/base.html' %}
-
 {% load static  %}
 
    {% block css %}
@@ -37,45 +36,61 @@
 
     {% endblock %}
 
+{%  block body %} 
+<div class="container">
+  <h1>Mens Fashion Accessiors</h1>
+  <div id="demo" class="carousel slide my-3" data-ride="carousel">
 
-  
-  <div class="container">
-
-    <div id="demo" class="carousel slide my-3" data-ride="carousel">
-      
-      {%  block body %}
       <ul class="carousel-indicators">
-        <!-- <li data-target="#demo" data-slide-to="0" class="active"></li> -->
+        <li data-target="#demo" data-slide-to="0" class="active"></li>
+        
         {% for i in range %}
-        <li data-target="#demo" data-slide-to="{{i}}" class="active" ></li>
+        <li data-target="#demo" data-slide-to="{{i}}"></li>
         {% endfor %}
       </ul>
-    
+
     <!-- Slideshow starts here -->
-
-      <div class="container  carousel-inner no-padding">
-        {% for i in product %}
-          <div class="carousel-item active">
-            {% if forloop.counter|divisibleby:3 and forloop.counter > 0  %}
-            <div class="col-xs-3 col-sm-3 col-md-3">
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src='/media/{{i.image}}' alt="Card image cap">
-                <div class="card-body">
-                  <h5 class="card-title">{{i.product_name}}</h5>
-                  <p class="card-text">{{i.desc}}</p>
-                  <a href="#" class="btn btn-primary">Add to Cart</a>
-                </div>
-              </div>
+    <div class="container  carousel-inner no-padding">
+      
+      <div class="carousel-item active">
+        <!-- <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src='/media/{{product.0.image}}' alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{product.0.product_name}}</h5>
+              <p class="card-text">{{product.0.desc}}</p>
+              <a href="#" class="btn btn-primary">Add to Cart</a>
             </div>
-            {% endif %}
-            <!-- DIVISIBLE BY 3 BCOZ THE RANGE WILL ITERATE AS  -->
-            <!-- ITERATE AS 0,1,2,3 (SO TOTAL OF 4 ITERATIONS) -->
-            <!-- BOOTSTRAP CARD HAS SPACE FOR 4 CARDS IN A ROW -->
           </div>
-        
-        {% endfor %}
-      </div>
+        </div> -->
 
+        <!-- Starting the loop from the 2nd carousel (slide) -->
+      {% for i in product %}
+        <div class="col-xs-3 col-sm-3 col-md-3">
+          <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src='/media/{{i.image}}' alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{i.product_name}}</h5>
+              <p class="card-text">{{i.desc}}</p>
+              <a href="#" class="btn btn-primary">Add to Cart</a>
+            </div>
+          </div>
+        </div>
+        
+        {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
+        <!-- DIVISIBLE BY 3 BCOZ THE RANGE WILL ITERATE AS  -->
+        <!-- ITERATE AS 0,1,2,3 (SO TOTAL OF 4 ITERATIONS) -->
+        <!-- BOOTSTRAP CARD HAS SPACE FOR 4 CARDS IN A ROW -->   
+          </div>
+          <div class="carousel-item">
+        {% endif %}
+    {% endfor %}
+          </div>
+
+
+  </div>
+  </div>
+</div>
     <!-- Left and right Controls for the slide -->
     <a class="carousel-control-prev" href="#demo" data-slide="prev">
       <span class="carousel-control-prev-icon"></span>
@@ -83,9 +98,6 @@
     <a class="carousel-control-next" href="#demo" data-slide="next">
       <span class="carousel-control-next-icon"></span>
     </a>
-
-
-
   {%  endblock %}
-</div>
-</div>
+<!-- Carousel Container Closed-->
+
